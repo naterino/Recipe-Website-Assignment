@@ -1,11 +1,11 @@
 <template>
-  <template v-if="loading">Loading</template>
+  <p v-if="loading" role="status" aria-live="polite" class="my-8">Loading recipe...</p>
   <template v-else-if="error">
     <h2>Recipe not found</h2>
-    <RouterLink to="/">Back to search</RouterLink>
+    <RouterLink to="/" aria-label="Return to recipe search">Back to search</RouterLink>
   </template>
   <template v-else>
-    <div class="flex flex-col md:flex-row gap-8 my-8">
+    <section class="flex flex-col md:flex-row gap-8 my-8" aria-labelledby="recipe-title">
       <div class="md:min-w-1/2">
         <img
           :src="`https://img.spoonacular.com/recipes/${recipe.id}-480x360.jpg`"
@@ -19,22 +19,31 @@
         />
       </div>
       <div>
-        <h1 class="mb-4">{{ recipe.title }}</h1>
-        <div class="text-sm">
-          <div v-if="recipe.servings">{{ recipe.servings }} servings</div>
-          <div v-if="recipe.readyInMinutes">Ready in: {{ recipe.readyInMinutes }} minutes</div>
-          <ul class="health-information" v-if="healthLabels.length">
-            <li v-for="label in healthLabels" :key="label">{{ label }}</li>
-          </ul>
-        </div>
+        <h1 id="recipe-title" class="mb-4">{{ recipe.title }}</h1>
+        <dl class="text-sm mb-4">
+          <div v-if="recipe.servings">
+            <dt class="sr-only">Servings</dt>
+            <dd>{{ recipe.servings }} servings</dd>
+          </div>
+          <div v-if="recipe.readyInMinutes">
+            <dt class="sr-only">Prep time</dt>
+            <dd>Ready in: {{ recipe.readyInMinutes }} minutes</dd>
+          </div>
+        </dl>
+        <ul v-if="healthLabels.length" aria-label="Health information">
+          <li v-for="label in healthLabels" :key="label">{{ label }}</li>
+        </ul>
       </div>
-    </div>
+    </section>
     <p v-html="recipe.summary" class="mb-8" />
     <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-140">
-        <h3>Ingredients</h3>
-        <button @click="useMetric = !useMetric">
-          {{ useMetric ? 'Metric' : 'Imperial' }}
+      <section aria-labelledby="ingredients-heading" class="md:w-140">
+        <h2 id="ingredients-heading">Ingredients</h2>
+        <button
+          @click="useMetric = !useMetric"
+          :aria-label="`Switch to ${useMetric ? 'imperial' : 'metric'} measurements`"
+        >
+          {{ useMetric ? 'Switch to Imperial' : 'Switch to Metric' }}
         </button>
         <ul>
           <IngredientItem
@@ -44,19 +53,12 @@
             :measure="useMetric ? ing.measures.metric : ing.measures.us"
           />
         </ul>
-      </div>
+      </section>
 
-      <div>
-        <h2>Cooking Steps</h2>
-        <div v-for="(group, i) in recipe.analyzedInstructions" :key="i">
-          <h3 v-if="group.name">{{ group.name }}</h3>
-          <ul>
-            <li v-for="step in group.steps" :key="step.number">
-              <span>{{ step.number }}:</span>{{ step.step }}
-            </li>
-          </ul>
-        </div>
-      </div>
+      <section aria-labelledby="instructions-heading">
+        <h2 id="instructions-heading">Cooking Steps</h2>
+        <div v-html="recipe.instructions" />
+      </section>
     </div>
   </template>
 </template>

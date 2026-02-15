@@ -2,7 +2,11 @@
   <article
     class="flex flex-col md:flex-row relative group overflow-hidden bg-(--color-bg-secondary)"
   >
-    <RouterLink class="absolute inset-0 z-10" :to="`/recipe/${props.id}`"></RouterLink>
+    <RouterLink
+      class="absolute inset-0 z-10"
+      :to="`/recipe/${props.id}`"
+      :aria-label="`View recipe: ${props.title}`"
+    ></RouterLink>
     <div class="overflow-hidden md:w-64 shrink-0">
       <img
         :src="props.image"

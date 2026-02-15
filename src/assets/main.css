@@ -67,6 +67,15 @@
     line-height: 1.5;
   }
 
+  ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+  }
+
+  li + li {
+    margin-top: 0.5rem;
+  }
+
   button {
     background: var(--color-accent);
     color: var(--color-text-light);

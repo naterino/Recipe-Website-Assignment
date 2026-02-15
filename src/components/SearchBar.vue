@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="$emit('search')" class="flex gap-2 w-full max-w-xl">
+    <label for="recipe-search" class="sr-only">Search recipes</label>
     <input
+      id="recipe-search"
       type="text"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"

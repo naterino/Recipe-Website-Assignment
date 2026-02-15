@@ -1,13 +1,16 @@
 <template>
-  <h3>Filter by cuisine style</h3>
-  <select
-    :value="modelValue"
-    @change="$emit('update:modelValue', $event.target.value)"
-    class="bg-(--color-bg-secondary) p-2"
-  >
-    <option value="">All Cuisines</option>
-    <option v-for="c in cuisines" :key="c" :value="c">{{ c }}</option>
-  </select>
+  <div>
+    <label for="cuisine-filter">Filter by cuisine style</label>
+    <select
+      id="cuisine-filter"
+      :value="modelValue"
+      @change="$emit('update:modelValue', $event.target.value)"
+      class="bg-(--color-bg-secondary) p-2"
+    >
+      <option value="">All Cuisines</option>
+      <option v-for="c in cuisines" :key="c" :value="c">{{ c }}</option>
+    </select>
+  </div>
 </template>
 
 <script setup>
