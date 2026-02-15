@@ -6,12 +6,14 @@
       <RouterLink to="/" class="font-bold text-2xl">Medavie Recipe Website</RouterLink>
     </nav>
   </header>
-  <main class="container pb-8 min-h-screen">
+  <main class="container pb-8 flex-1">
     <RouterView v-slot="{ Component }">
       <KeepAlive include="HomePage">
         <component :is="Component" />
       </KeepAlive>
     </RouterView>
   </main>
-  <footer class="h-100 bg-(--color-bg-secondary)" aria-hidden="true"></footer>
+  <footer class="py-16 text-center flex flex-col bg-(--color-bg-secondary)" aria-hidden="true">
+    *Footer section todo*
+  </footer>
 </template>

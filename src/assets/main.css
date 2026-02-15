@@ -36,6 +36,13 @@
       sans-serif;
     color: var(--color-text);
     background-color: var(--color-bg);
+    min-height: 100dvh;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
   }
 
   a {
