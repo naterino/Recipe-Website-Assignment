@@ -15,10 +15,16 @@
       :image="result.image"
       :summary="result.summary"
     />
+    <div class="flex gap-4 mx-auto items-center">
+      <button @click="prevPage" :disabled="page <= 1">Previous</button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="page >= totalPages">Next</button>
+    </div>
   </section>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipeSearch } from '@/composables/useRecipeSearch'
@@ -26,6 +32,20 @@ import CuisineFilter from '@/components/CuisineFilter.vue'
 
 defineOptions({ name: 'HomePage' })
 
-const { query, cuisine, results, hasSearched, totalResults, loading, error, search } =
-  useRecipeSearch()
+const {
+  query,
+  cuisine,
+  results,
+  hasSearched,
+  totalResults,
+  page,
+  perPage,
+  nextPage,
+  prevPage,
+  loading,
+  error,
+  search,
+} = useRecipeSearch()
+
+const totalPages = computed(() => Math.ceil(totalResults.value / perPage))
 </script>
