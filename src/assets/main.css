@@ -6,7 +6,7 @@
   --color-accent: #2d6b1e;
   --color-accent-hover: #1e5214;
   --color-text: #2b2b2b;
-  --color-text-light: #6b6b6b;
+  --color-text-light: #fafafa;
   --color-bg: #fffad6;
   --color-bg-secondary: #c7c799;
   --color-border: #e0d5c1;
@@ -65,5 +65,23 @@
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
+  }
+
+  button {
+    background: var(--color-accent);
+    color: var(--color-text-light);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: var(--color-accent-hover);
+  }
+
+  button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 }

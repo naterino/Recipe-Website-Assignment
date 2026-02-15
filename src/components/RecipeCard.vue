@@ -14,11 +14,7 @@
     </div>
     <div class="p-4">
       <h2 class="text-lg font-semibold mb-2">{{ props.title }}</h2>
-      <p
-        v-if="props.summary"
-        class="text-sm text-(--color-text-light) line-clamp-3"
-        v-html="props.summary"
-      ></p>
+      <p v-if="props.summary" class="text-sm line-clamp-3" v-html="props.summary"></p>
     </div>
   </article>
 </template>

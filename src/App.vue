@@ -4,7 +4,7 @@
   <header class="text-center py-4 bg-(--color-bg-secondary)">
     <RouterLink to="/" class="font-bold text-2xl">Medavie Recipe Website</RouterLink>
   </header>
-  <main class="container">
+  <main class="container pb-8">
     <RouterView v-slot="{ Component }">
       <KeepAlive include="HomePage">
         <component :is="Component" />
