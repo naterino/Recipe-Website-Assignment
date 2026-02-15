@@ -1,9 +1,5 @@
 <template>
-  <h1>Homepage</h1>
-  <form @submit.prevent="search">
-    <input type="text" v-model="query" />
-    <input type="submit" value="Search" />
-  </form>
+  <SearchBar v-model="query" @search="search" />
   <section v-if="results.length">
     <RecipeCard
       v-for="result in results"
@@ -16,6 +12,7 @@
 </template>
 
 <script setup>
+import SearchBar from '@/components/SearchBar.vue'
 import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipeSearch } from '@/composables/useRecipeSearch'
 
