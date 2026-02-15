@@ -1,18 +1,26 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { searchRecipes } from '@/services/api'
 
 export function useRecipeSearch() {
   const results = ref([])
+  const totalResults = ref(0)
+  const hasSearched = ref(false)
   const query = ref('')
-  const loading = ref(true)
+  const loading = ref(false)
+  const cuisine = ref(null)
   const error = ref(null)
 
   async function search() {
+    loading.value = true
+    error.value = null
     try {
       const data = await searchRecipes({
-        query: query.value
+        query: query.value,
+        cuisine: cuisine.value
       })
       results.value = data.results
+      totalResults.value = data.totalResults
+      hasSearched.value = true
     } catch (e) {
       error.value = e.message
     } finally {
@@ -20,5 +28,9 @@ export function useRecipeSearch() {
     }
   }
 
-  return { query, results, loading, error, search }
+  function applyFilter() {
+    search()
+  }
+
+  return { query, cuisine, hasSearched, results, totalResults, loading, error, search, applyFilter }
 }

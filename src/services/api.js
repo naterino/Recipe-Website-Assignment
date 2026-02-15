@@ -26,5 +26,5 @@ export function getRecipeById(id) {
 }
 
 export function searchRecipes({ query, cuisine, number = 5, offset = 0 }) {
-  return request('/recipes/complexSearch', { query, cuisine, number, offset })
+  return request('/recipes/complexSearch', { query, cuisine, number, offset, addRecipeInformation: true })
 }

@@ -1,1 +1,69 @@
 @import 'tailwindcss';
+
+:root {
+  --color-primary: #c8502d;
+  --color-primary-hover: #a93f22;
+  --color-accent: #2d6b1e;
+  --color-accent-hover: #1e5214;
+  --color-text: #2b2b2b;
+  --color-text-light: #6b6b6b;
+  --color-bg: #fffad6;
+  --color-bg-secondary: #c7c799;
+  --color-border: #e0d5c1;
+  --color-error: #dc2626;
+
+  --radius: 8px;
+  --max-width: 1024px;
+}
+
+@utility container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+}
