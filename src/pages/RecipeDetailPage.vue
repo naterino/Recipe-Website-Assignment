@@ -39,12 +39,6 @@
     <div class="flex flex-col md:flex-row gap-8">
       <section aria-labelledby="ingredients-heading" class="md:w-140">
         <h2 id="ingredients-heading">Ingredients</h2>
-        <button
-          @click="useMetric = !useMetric"
-          :aria-label="`Switch to ${useMetric ? 'imperial' : 'metric'} measurements`"
-        >
-          {{ useMetric ? 'Switch to Imperial' : 'Switch to Metric' }}
-        </button>
         <ul>
           <IngredientItem
             v-for="ing in recipe.extendedIngredients"
@@ -70,8 +64,6 @@ import { useRecipeDetail } from '@/composables/useRecipeDetail'
 import IngredientItem from '@/components/IngredientItem.vue'
 
 const { recipe, loading, error } = useRecipeDetail(useRoute().params.id)
-
-const useMetric = ref(false)
 
 const healthLabels = computed(() => {
   const labels = {
