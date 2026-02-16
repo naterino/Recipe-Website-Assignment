@@ -1,5 +1,7 @@
 <template>
-  <p v-if="loading" role="status" aria-live="polite" class="my-8">Loading recipe...</p>
+  <template v-if="loading">
+    <RecipeSkeleton />
+  </template>
   <template v-else-if="error">
     <h1>Recipe not found</h1>
     <RouterLink to="/" aria-label="Return to recipe search">Back to search</RouterLink>
@@ -15,7 +17,10 @@
     https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg 636w
   `"
           sizes="(max-width: 480px) 240px, (max-width: 768px) 480px, 636px"
+          width="636"
+          height="393"
           :alt="recipe.title"
+          class="w-full h-auto"
         />
       </div>
       <div>
@@ -68,6 +73,7 @@ import { useRoute } from 'vue-router'
 import { useRecipeDetail } from '@/composables/useRecipeDetail'
 import IngredientItem from '@/components/IngredientItem.vue'
 import { stripLinks } from '@/utils/stripLinks'
+import RecipeSkeleton from '@/components/RecipeSkeleton.vue'
 
 const { recipe, loading, error } = useRecipeDetail(useRoute().params.id)
 
