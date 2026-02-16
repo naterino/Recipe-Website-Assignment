@@ -1,7 +1,7 @@
 <template>
   <p v-if="loading" role="status" aria-live="polite" class="my-8">Loading recipe...</p>
   <template v-else-if="error">
-    <h2>Recipe not found</h2>
+    <h1>Recipe not found</h1>
     <RouterLink to="/" aria-label="Return to recipe search">Back to search</RouterLink>
   </template>
   <template v-else>
@@ -19,41 +19,42 @@
         />
       </div>
       <div>
-        <h1 id="recipe-title" class="mb-4">{{ recipe.title }}</h1>
-        <dl class="text-sm mb-4">
+        <h1 class="mb-4">{{ recipe.title }}</h1>
+        <dl class="text-sm mb-4 flex gap-4">
           <div v-if="recipe.servings">
-            <dt class="sr-only">Servings</dt>
-            <dd>{{ recipe.servings }} servings</dd>
+            <dt class="font-semibold">Servings</dt>
+            <dd>{{ recipe.servings }}</dd>
           </div>
           <div v-if="recipe.readyInMinutes">
-            <dt class="sr-only">Prep time</dt>
-            <dd>Ready in: {{ recipe.readyInMinutes }} minutes</dd>
+            <dt class="font-semibold">Prep time</dt>
+            <dd>{{ recipe.readyInMinutes }} min</dd>
           </div>
         </dl>
-        <ul v-if="healthLabels.length" aria-label="Health information">
+        <ul v-if="healthLabels.length" class="text-sm" aria-label="Health information">
+          <li class="font-semibold">Health Information</li>
           <li v-for="label in healthLabels" :key="label">{{ label }}</li>
         </ul>
       </div>
     </section>
     <p v-html="recipe.summary" class="mb-8" />
-    <div class="flex flex-col md:flex-row gap-8">
-      <section aria-labelledby="ingredients-heading" class="md:w-140">
+    <section class="flex flex-col md:flex-row gap-8">
+      <aside aria-labelledby="ingredients-heading" class="md:w-100">
         <h2 id="ingredients-heading">Ingredients</h2>
         <ul>
           <IngredientItem
             v-for="ing in recipe.extendedIngredients"
             :key="ing.id"
             :name="ing.name"
-            :measure="useMetric ? ing.measures.metric : ing.measures.us"
+            :measure="ing.measures.metric"
           />
         </ul>
-      </section>
+      </aside>
 
-      <section aria-labelledby="instructions-heading">
+      <article aria-labelledby="instructions-heading">
         <h2 id="instructions-heading">Cooking Steps</h2>
         <div v-html="recipe.instructions" />
-      </section>
-    </div>
+      </article>
+    </section>
   </template>
 </template>
 

@@ -7,7 +7,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       placeholder="Search recipes..."
-      class="flex-1 px-4 py-2 bg-(--color-bg-secondary) rounded-lg focus:outline-none focus:ring-2 focus:ring-(--color-accent)"
+      class="flex-1 px-4 py-2 bg-(--color-bg-secondary) text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-(--color-accent)"
     />
     <button
       type="submit"

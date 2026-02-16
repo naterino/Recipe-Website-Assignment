@@ -16,7 +16,7 @@
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
       />
     </div>
-    <div class="p-4">
+    <div class="p-4 text-(--color-secondary)">
       <h2 class="text-lg font-semibold mb-2">{{ props.title }}</h2>
       <p v-if="props.summary" class="text-sm line-clamp-3" v-html="props.summary"></p>
     </div>

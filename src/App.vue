@@ -1,9 +1,11 @@
 <script setup></script>
 
 <template>
-  <header class="text-center py-4 bg-(--color-bg-secondary)">
+  <header class="text-center py-8 bg-(--color-primary)">
     <nav aria-label="Main">
-      <RouterLink to="/" class="font-bold text-2xl">Medavie Recipe Website</RouterLink>
+      <RouterLink to="/" class="font-bold text-(--color-secondary) text-2xl"
+        >Medavie Recipe Website</RouterLink
+      >
     </nav>
   </header>
   <main class="container pb-8 flex-1">

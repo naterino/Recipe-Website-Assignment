@@ -5,7 +5,7 @@
       id="cuisine-filter"
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
-      class="bg-(--color-bg-secondary) p-2"
+      class="bg-(--color-bg-secondary) text-(--color-secondary) p-2"
     >
       <option value="">All Cuisines</option>
       <option v-for="c in cuisines" :key="c" :value="c">{{ c }}</option>
