@@ -9,6 +9,7 @@ export function useRecipeDetail(id) {
   onMounted(async () => {
     try {
       recipe.value = await getRecipeById(id)
+      document.title = `${recipe.value.title} — Medavie Recipe Website`
     } catch (e) {
       error.value = e.message
     } finally {

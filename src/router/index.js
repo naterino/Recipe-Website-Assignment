@@ -6,6 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: { title: 'Medavie Recipe Website' },
       component: () => import('@/pages/HomePage.vue'),
     },
     {
@@ -14,6 +15,10 @@ const router = createRouter({
       component: () => import('@/pages/RecipeDetailPage.vue'),
     },
   ],
+})
+
+router.beforeEach((to) => {
+  document.title = to.meta.title || 'Medavie Recipe Website'
 })
 
 export default router
