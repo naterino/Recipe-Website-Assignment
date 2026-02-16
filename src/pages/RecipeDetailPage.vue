@@ -52,7 +52,11 @@
 
       <article aria-labelledby="instructions-heading">
         <h2 id="instructions-heading">Cooking Steps</h2>
-        <div v-html="recipe.instructions" />
+        <ol v-for="(group, i) in recipe.analyzedInstructions" :key="i" class="list-decimal pl-6">
+          <li v-for="step in group.steps" :key="step.number">
+            {{ step.step }}
+          </li>
+        </ol>
       </article>
     </section>
   </template>
