@@ -2,6 +2,9 @@
 
 A recipe search application built with Vue 3 and the Spoonacular API. Search for recipes, filter by cuisine, and view detailed recipe information including ingredients and cooking steps.
 
+View live on netlify:
+https://tubular-blancmange-cd14e8.netlify.app/
+
 ## Features
 
 - **Recipe Search** — Search recipes by keyword with paginated results (5 per page)
