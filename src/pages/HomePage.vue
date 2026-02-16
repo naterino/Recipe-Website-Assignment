@@ -1,8 +1,6 @@
 <template>
-  <h1 class="sr-only">Recipe Search</h1>
-
   <section class="my-8 flex flex-col items-center" aria-labelledby="search-heading">
-    <h2 id="search-heading" class="mb-4">Search for a recipe...</h2>
+    <h1 id="search-heading" class="mb-4">Search for a recipe...</h1>
     <SearchBar v-model="query" @search="search" class="mb-8" />
   </section>
 
