@@ -5,7 +5,7 @@
     <RouterLink to="/" aria-label="Return to recipe search">Back to search</RouterLink>
   </template>
   <template v-else>
-    <section class="flex flex-col md:flex-row gap-8 my-8" aria-labelledby="recipe-title">
+    <section class="flex flex-col md:flex-row gap-8 my-12" aria-labelledby="recipe-title">
       <div class="md:min-w-1/2">
         <img
           :src="`https://img.spoonacular.com/recipes/${recipe.id}-480x360.jpg`"
@@ -36,9 +36,9 @@
         </ul>
       </div>
     </section>
-    <p v-html="recipe.summary" class="mb-8" />
+    <p v-html="stripLinks(recipe.summary)" class="mb-12" />
     <section class="flex flex-col md:flex-row gap-8">
-      <aside aria-labelledby="ingredients-heading" class="md:w-100">
+      <aside aria-labelledby="ingredients-heading" class="md:w-60 shrink-0">
         <h2 id="ingredients-heading">Ingredients</h2>
         <ul>
           <IngredientItem
@@ -59,10 +59,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRecipeDetail } from '@/composables/useRecipeDetail'
 import IngredientItem from '@/components/IngredientItem.vue'
+import { stripLinks } from '@/utils/stripLinks'
 
 const { recipe, loading, error } = useRecipeDetail(useRoute().params.id)
 

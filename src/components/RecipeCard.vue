@@ -18,12 +18,14 @@
     </div>
     <div class="p-4 text-(--color-secondary)">
       <h2 class="text-lg font-semibold mb-2">{{ props.title }}</h2>
-      <p v-if="props.summary" class="text-sm line-clamp-3" v-html="props.summary"></p>
+      <p v-if="props.summary" class="text-sm line-clamp-3" v-html="stripLinks(props.summary)"></p>
     </div>
   </article>
 </template>
 
 <script setup>
+import { stripLinks } from '@/utils/stripLinks'
+
 const props = defineProps({
   id: String,
   title: String,
