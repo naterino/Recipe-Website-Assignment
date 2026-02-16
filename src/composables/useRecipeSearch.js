@@ -36,6 +36,7 @@ export function useRecipeSearch() {
       results.value = data.results
       totalResults.value = data.totalResults
       hasSearched.value = true
+      // Keep params in URL
       syncURL()
     } catch (e) {
       error.value = e.message
@@ -56,10 +57,16 @@ export function useRecipeSearch() {
     }
   }
 
+  // Make sure we're not persisting paginating when filtering or searching
+  function resetAndSearch() {
+    page.value = 1
+    search()
+  }
+
   // Auto-search if URL has query params
   if (route.query.q) {
     search()
   }
 
-  return { query, cuisine, hasSearched, results, totalResults, loading, error, page, perPage, search, nextPage, prevPage }
+  return { query, cuisine, hasSearched, results, totalResults, loading, error, page, perPage, search, nextPage, prevPage, resetAndSearch }
 }

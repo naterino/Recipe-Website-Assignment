@@ -1,7 +1,7 @@
 <template>
   <section class="my-8 flex flex-col items-center" aria-labelledby="search-heading">
-    <h1 id="search-heading" class="mb-4">Search for a recipe...</h1>
-    <SearchBar v-model="query" @search="search" class="mb-8" />
+    <h1 id="search-heading" class="mb-4">Search for a recipe</h1>
+    <SearchBar v-model="query" @search="resetAndSearch" class="mb-8" />
   </section>
 
   <p v-if="error" role="alert">{{ error }}</p>
@@ -12,8 +12,12 @@
     aria-labelledby="results-heading"
   >
     <h2 id="results-heading" class="sr-only">Search Results</h2>
-    <p v-if="!loading" aria-live="polite" role="status">Found {{ totalResults }} recipes.</p>
-    <CuisineFilter v-if="!loading" v-model="cuisine" @update:modelValue="search" />
+    <div class="flex justify-between">
+      <p v-if="!loading" aria-live="polite" role="status" class="text-sm">
+        Found {{ totalResults }} recipes.
+      </p>
+      <CuisineFilter v-if="!loading" v-model="cuisine" @update:modelValue="resetAndSearch" />
+    </div>
 
     <template v-if="loading">
       <span class="sr-only" role="status" aria-live="polite">Searching...</span>
@@ -61,7 +65,7 @@ const {
   prevPage,
   loading,
   error,
-  search,
+  resetAndSearch,
 } = useRecipeSearch()
 
 const totalPages = computed(() => Math.ceil(totalResults.value / perPage))

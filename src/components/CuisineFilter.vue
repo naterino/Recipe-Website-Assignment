@@ -1,11 +1,11 @@
 <template>
   <div>
-    <label for="cuisine-filter">Filter by cuisine style</label>
+    <label for="cuisine-filter" class="text-sm">Filter by cuisine style</label>
     <select
       id="cuisine-filter"
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
-      class="bg-(--color-bg-secondary) text-(--color-secondary) p-2"
+      class="ml-4 text-sm"
     >
       <option value="">All Cuisines</option>
       <option v-for="c in cuisines" :key="c" :value="c">{{ c }}</option>
