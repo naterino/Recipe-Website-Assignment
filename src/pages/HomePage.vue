@@ -35,7 +35,7 @@
       />
     </template>
 
-    <nav v-if="results.length > 4" aria-label="Pagination" class="flex gap-4 mx-auto items-center">
+    <nav v-if="totalResults > 5" aria-label="Pagination" class="flex gap-4 mx-auto items-center">
       <button class="w-30" @click="prevPage" :disabled="page <= 1 || loading">Previous</button>
       <span>Page {{ page }} of {{ totalPages }}</span>
       <button class="w-30" @click="nextPage" :disabled="page >= totalPages || loading">Next</button>
