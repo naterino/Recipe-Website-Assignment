@@ -12,7 +12,7 @@
     aria-labelledby="results-heading"
   >
     <h2 id="results-heading" class="sr-only">Search Results</h2>
-    <div class="flex justify-between">
+    <div class="flex flex-col items-start md:flex-row md:justify-between md:items-center">
       <p v-if="!loading" aria-live="polite" role="status" class="text-sm">
         Found {{ totalResults }} recipes.
       </p>
@@ -50,8 +50,6 @@ import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipeSearch } from '@/composables/useRecipeSearch'
 import CuisineFilter from '@/components/CuisineFilter.vue'
 import RecipeCardSkeleton from '@/components/RecipeCardSkeleton.vue'
-
-defineOptions({ name: 'HomePage' })
 
 const {
   query,

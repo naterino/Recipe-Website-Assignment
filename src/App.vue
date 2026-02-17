@@ -8,9 +8,7 @@
   </header>
   <main class="container pb-8 flex-1">
     <RouterView v-slot="{ Component }">
-      <KeepAlive include="HomePage">
-        <component :is="Component" />
-      </KeepAlive>
+      <component :is="Component" />
     </RouterView>
   </main>
   <footer
