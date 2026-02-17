@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { searchRecipes } from '@/services/api'
 
@@ -10,20 +10,20 @@ export function useRecipeSearch() {
   const hasSearched = ref(false)
   const loading = ref(false)
   const error = ref(null)
-  const query = ref(route.query.q || '')
-  const cuisine = ref(route.query.cuisine || '')
-  const page = ref(Number(route.query.page) || 1)
+  const query = ref('')
+  const cuisine = ref('')
+  const page = ref(1)
   const perPage = 5
 
-  function syncURL() {
-    const params = {}
-    if (query.value) params.q = query.value
-    if (cuisine.value) params.cuisine = cuisine.value
-    if (page.value > 1) params.page = page.value
-    router.replace({ query: params })
+  function navigate(params) {
+    const queryParams = {}
+    if (params.q) queryParams.q = params.q
+    if (params.cuisine) queryParams.cuisine = params.cuisine
+    if (params.page > 1) queryParams.page = params.page
+    router.push({ query: queryParams })
   }
 
-  async function search() {
+  async function fetchResults() {
     loading.value = true
     error.value = null
     try {
@@ -36,8 +36,6 @@ export function useRecipeSearch() {
       results.value = data.results
       totalResults.value = data.totalResults
       hasSearched.value = true
-      // Keep params in URL
-      syncURL()
     } catch (e) {
       error.value = e.message
     } finally {
@@ -45,28 +43,50 @@ export function useRecipeSearch() {
     }
   }
 
+  watch(
+    () => route.query,
+    (newQuery) => {
+      query.value = newQuery.q || ''
+      cuisine.value = newQuery.cuisine || ''
+      page.value = Number(newQuery.page) || 1
+
+      if (newQuery.q) {
+        fetchResults()
+      } else {
+        results.value = []
+        totalResults.value = 0
+        hasSearched.value = false
+      }
+    },
+    { immediate: true },
+  )
+
   function nextPage() {
-    page.value++
-    search()
+    navigate({ q: query.value, cuisine: cuisine.value, page: page.value + 1 })
   }
 
   function prevPage() {
     if (page.value > 1) {
-      page.value--
-      search()
+      navigate({ q: query.value, cuisine: cuisine.value, page: page.value - 1 })
     }
   }
 
-  // Make sure we're not persisting paginating when filtering or searching
   function resetAndSearch() {
-    page.value = 1
-    search()
+    navigate({ q: query.value, cuisine: cuisine.value, page: 1 })
   }
 
-  // Auto-search if URL has query params
-  if (route.query.q) {
-    search()
+  return {
+    query,
+    cuisine,
+    hasSearched,
+    results,
+    totalResults,
+    loading,
+    error,
+    page,
+    perPage,
+    nextPage,
+    prevPage,
+    resetAndSearch,
   }
-
-  return { query, cuisine, hasSearched, results, totalResults, loading, error, page, perPage, search, nextPage, prevPage, resetAndSearch }
 }
