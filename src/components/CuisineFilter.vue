@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="cuisine-filter" class="text-sm">Filter by cuisine style</label>
+    <label for="cuisine-filter" class="text-sm">Filter by Cuisine Style:</label>
     <select
       id="cuisine-filter"
       :value="modelValue"
